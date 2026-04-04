@@ -75,14 +75,10 @@
             b += p.b * w;
           }
 
-          const ex = Math.min(nx, 1 - nx) / edge;
-          const ey = Math.min(ny, 1 - ny) / edge;
-          const vignette = Math.min(1, ex) * Math.min(1, ey);
-
           const idx = (y * RES + x) * 4;
-          d[idx]     = (r / totalW) * vignette;
-          d[idx + 1] = (g / totalW) * vignette;
-          d[idx + 2] = (b / totalW) * vignette;
+          d[idx]     = r / totalW;
+          d[idx + 1] = g / totalW;
+          d[idx + 2] = b / totalW;
           d[idx + 3] = 255;
         }
       }
