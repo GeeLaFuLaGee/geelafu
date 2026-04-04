@@ -67,14 +67,10 @@
             g += p.g * w;
             b += p.b * w;
           }
-          const edge = 0.15;
-          const ex = Math.min(nx, 1 - nx) / edge;
-          const ey = Math.min(ny, 1 - ny) / edge;
-          const vignette = Math.min(1, ex) * Math.min(1, ey);
           const i = (y * W + x) * 4;
-          d[i]     = (r / totalW) * vignette;
-          d[i + 1] = (g / totalW) * vignette;
-          d[i + 2] = (b / totalW) * vignette;
+          d[i]     = r / totalW;
+          d[i + 1] = g / totalW;
+          d[i + 2] = b / totalW;
           d[i + 3] = 255;
         }
       }
