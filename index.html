@@ -1,69 +1,56 @@
-const canvas = document.getElementById('c');
-const ctx = canvas.getContext('2d');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gee La Fu</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { overflow: hidden; }
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+    h1 {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: monospace;
+      font-size: 2rem;
+      font-weight: normal;
+      letter-spacing: 0.3em;
+      color: #fff;
+      mix-blend-mode: difference;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <h1>GEE LA FU</h1>
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
 
-const points = [
-  { x: Math.random(), y: Math.random(), r: 255, g: 0, b: 0 },
-  { x: Math.random(), y: Math.random(), r: 0, g: 0, b: 255 },
-  { x: Math.random(), y: Math.random(), r: 0, g: 0, b: 0 }
-];
+    const points = [
+      { x: Math.random(), y: Math.random(), r: 255, g: 0, b: 0 },
+      { x: Math.random(), y: Math.random(), r: 0, g: 0, b: 255 },
+      { x: Math.random(), y: Math.random(), r: 0, g: 0, b: 0 }
+    ];
 
-const velocity = points.map(() => ({
-  vx: (Math.random() - 0.5) * 0.002,
-  vy: (Math.random() - 0.5) * 0.002
-}));
+    const velocity = points.map(() => ({
+      vx: (Math.random() - 0.5) * 0.002,
+      vy: (Math.random() - 0.5) * 0.002
+    }));
 
-function draw() {
-  const W = canvas.offsetWidth;
-  const H = canvas.offsetHeight;
-  if (canvas.width !== W || canvas.height !== H) {
-    canvas.width = W;
-    canvas.height = H;
-  }
-
-  for (let i = 0; i < points.length; i++) {
-    points[i].x += velocity[i].vx;
-    points[i].y += velocity[i].vy;
-    if (points[i].x < 0 || points[i].x > 1) velocity[i].vx *= -1;
-    if (points[i].y < 0 || points[i].y > 1) velocity[i].vy *= -1;
-  }
-
-  const img = ctx.createImageData(W, H);
-  const d = img.data;
-  const edge = 0.15;
-
-  for (let y = 0; y < H; y++) {
-    for (let x = 0; x < W; x++) {
-      const nx = x / W;
-      const ny = y / H;
-
-      let totalW = 0;
-      let r = 0, g = 0, b = 0;
-
-      for (const p of points) {
-        const dx = nx - p.x;
-        const dy = ny - p.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const w = 1 / (dist * dist + 0.0001);
-        totalW += w;
-        r += p.r * w;
-        g += p.g * w;
-        b += p.b * w;
+    function draw() {
+      const W = canvas.offsetWidth;
+      const H = canvas.offsetHeight;
+      if (canvas.width !== W || canvas.height !== H) {
+        canvas.width = W;
+        canvas.height = H;
       }
 
-      const ex = Math.min(nx, 1 - nx) / edge;
-      const ey = Math.min(ny, 1 - ny) / edge;
-      const vignette = Math.min(1, ex) * Math.min(1, ey);
-
-      const idx = (y * W + x) * 4;
-      d[idx]     = (r / totalW) * vignette;
-      d[idx + 1] = (g / totalW) * vignette;
-      d[idx + 2] = (b / totalW) * vignette;
-      d[idx + 3] = 255;
-    }
-  }
-
-  ctx.putImageData(img, 0, 0);
-  requestAnimationFrame(draw);
-}
-
-draw();
+      for (
