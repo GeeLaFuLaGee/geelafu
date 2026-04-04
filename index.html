@@ -18,7 +18,6 @@
       font-weight: normal;
       letter-spacing: 0.3em;
       color: #fff;
-      mix-blend-mode: difference;
       pointer-events: none;
     }
   </style>
@@ -34,45 +33,50 @@
     canvas.height = window.innerHeight;
 
     const points = [
-      { x: Math.random(), y: Math.random(), r: 255, g: 0, b: 0 },
-      { x: Math.random(), y: Math.random(), r: 0, g: 0, b: 255 },
-      { x: Math.random(), y: Math.random(), r: 0, g: 0, b: 0 }
+      { x: Math.random(), y: Math.random(), color: '255,0,0' },
+      { x: Math.random(), y: Math.random(), color: '0,0,255' },
+      { x: Math.random(), y: Math.random(), color: '80,0,120' }
     ];
 
     const velocity = points.map(() => ({
-      vx: (Math.random() - 0.5) * 0.002,
-      vy: (Math.random() - 0.5) * 0.002
+      vx: (Math.random() - 0.5) * 0.003,
+      vy: (Math.random() - 0.5) * 0.003
     }));
 
     function draw() {
       const W = canvas.width;
       const H = canvas.height;
+      const radius = Math.max(W, H) * 0.7;
+
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, W, H);
 
       for (let i = 0; i < points.length; i++) {
         points[i].x += velocity[i].vx;
         points[i].y += velocity[i].vy;
         if (points[i].x < 0 || points[i].x > 1) velocity[i].vx *= -1;
         if (points[i].y < 0 || points[i].y > 1) velocity[i].vy *= -1;
+
+        const px = points[i].x * W;
+        const py = points[i].y * H;
+        const grad = ctx.createRadialGradient(px, py, 0, px, py, radius);
+        grad.addColorStop(0, `rgba(${points[i].color},0.8)`);
+        grad.addColorStop(1, `rgba(${points[i].color},0)`);
+
+        ctx.globalCompositeOperation = 'screen';
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, W, H);
       }
 
-      const img = ctx.createImageData(W, H);
-      const d = img.data;
-      const edge = 0.15;
+      requestAnimationFrame(draw);
+    }
 
-      for (let y = 0; y < H; y++) {
-        for (let x = 0; x < W; x++) {
-          const nx = x / W;
-          const ny = y / H;
+    draw();
 
-          let totalW = 0;
-          let r = 0, g = 0, b = 0;
-
-          for (const p of points) {
-            const dx = nx - p.x;
-            const dy = ny - p.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            const w = 1 / (dist * dist + 0.0001);
-            totalW += w;
-            r += p.r * w;
-            g += p.g * w;
-            b += p.b * w;
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
