@@ -161,12 +161,12 @@
       }));
       startAnimation(points);
       artwork.src = randomImage;
-      artwork.onload = () => {
-        const w = artwork.offsetWidth;
-        const h = artwork.offsetHeight;
-        panel.style.height = h + 'px';
-        card.style.setProperty('--panel-width', w + 'px');
-      };
+      setTimeout(() => {
+      const w = artwork.offsetWidth;
+      const h = artwork.offsetHeight;
+      panel.style.height = h + 'px';
+      card.style.setProperty('--panel-width', w + 'px');
+      }, 100);
     };
     img.src = randomImage;
   </script>
