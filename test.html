@@ -17,7 +17,6 @@
       flex-direction: column;
       align-items: center;
       gap: 2rem;
-      pointer-events: none;
     }
     h1 {
       font-family: monospace;
@@ -25,11 +24,35 @@
       font-weight: normal;
       letter-spacing: 0.3em;
       color: #fff;
+      pointer-events: none;
+    }
+    #card {
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
     }
     img#artwork {
       width: 40vw;
       max-height: 60vh;
       object-fit: contain;
+      display: block;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: transform 0.6s ease;
+    }
+    #panel {
+      width: 0;
+      max-height: 60vh;
+      background: #fff;
+      flex-shrink: 0;
+      transition: width 0.6s ease;
+      overflow: hidden;
+    }
+    #card.open img#artwork {
+      transform: translateX(-50%);
+    }
+    #card.open #panel {
+      width: 40vw;
     }
   </style>
 </head>
@@ -37,7 +60,10 @@
   <canvas id="c"></canvas>
   <div id="content">
     <h1>GEE LA FU</h1>
-    <img id="artwork" src="" alt="">
+    <div id="card">
+      <img id="artwork" src="" alt="">
+      <div id="panel"></div>
+    </div>
   </div>
   <script>
     const images = [
@@ -47,6 +73,7 @@
       'IMG_0817.JPG',
       'IMG_2699.JPG'
     ];
+
     function sampleColors(img) {
       const offscreen = document.createElement('canvas');
       offscreen.width = 10;
@@ -60,6 +87,7 @@
         return { r: data[idx], g: data[idx+1], b: data[idx+2] };
       });
     }
+
     function startAnimation(points) {
       const canvas = document.getElementById('c');
       const ctx = canvas.getContext('2d');
@@ -77,53 +105,4 @@
           if (points[i].x <= 0) { points[i].x = 0; velocity[i].vx = Math.abs(velocity[i].vx); }
           if (points[i].x >= 1) { points[i].x = 1; velocity[i].vx = -Math.abs(velocity[i].vx); }
           if (points[i].y <= 0) { points[i].y = 0; velocity[i].vy = Math.abs(velocity[i].vy); }
-          if (points[i].y >= 1) { points[i].y = 1; velocity[i].vy = -Math.abs(velocity[i].vy); }
-        }
-        const img = ctx.createImageData(RES, RES);
-        const d = img.data;
-        for (let y = 0; y < RES; y++) {
-          for (let x = 0; x < RES; x++) {
-            const nx = x / RES;
-            const ny = y / RES;
-            let totalW = 0;
-            let r = 0, g = 0, b = 0;
-            for (const p of points) {
-              const dx = nx - p.x;
-              const dy = ny - p.y;
-              const w = 1 / (dx * dx + dy * dy + 0.0001);
-              totalW += w;
-              r += p.r * w;
-              g += p.g * w;
-              b += p.b * w;
-            }
-            const idx = (y * RES + x) * 4;
-            d[idx]     = r / totalW;
-            d[idx + 1] = g / totalW;
-            d[idx + 2] = b / totalW;
-            d[idx + 3] = 255;
-          }
-        }
-        ctx.putImageData(img, 0, 0);
-        requestAnimationFrame(draw);
-      }
-      draw();
-    }
-    const randomImage = images[Math.floor(Math.random() * images.length)];
-    const img = new Image();
-    img.onload = function() {
-      const colors = sampleColors(img);
-      const points = colors.map(c => ({
-        x: Math.random(),
-        y: Math.random(),
-        r: c.r,
-        g: c.g,
-        b: c.b
-      }));
-      startAnimation(points);
-      const artwork = document.getElementById('artwork');
-      artwork.src = randomImage;
-    };
-    img.src = randomImage;
-  </script>
-</body>
-</html>
+          if
