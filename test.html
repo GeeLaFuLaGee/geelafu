@@ -105,4 +105,57 @@
           if (points[i].x <= 0) { points[i].x = 0; velocity[i].vx = Math.abs(velocity[i].vx); }
           if (points[i].x >= 1) { points[i].x = 1; velocity[i].vx = -Math.abs(velocity[i].vx); }
           if (points[i].y <= 0) { points[i].y = 0; velocity[i].vy = Math.abs(velocity[i].vy); }
-          if
+          if (points[i].y >= 1) { points[i].y = 1; velocity[i].vy = -Math.abs(velocity[i].vy); }
+        }
+        const img = ctx.createImageData(RES, RES);
+        const d = img.data;
+        for (let y = 0; y < RES; y++) {
+          for (let x = 0; x < RES; x++) {
+            const nx = x / RES;
+            const ny = y / RES;
+            let totalW = 0;
+            let r = 0, g = 0, b = 0;
+            for (const p of points) {
+              const dx = nx - p.x;
+              const dy = ny - p.y;
+              const w = 1 / (dx * dx + dy * dy + 0.0001);
+              totalW += w;
+              r += p.r * w;
+              g += p.g * w;
+              b += p.b * w;
+            }
+            const idx = (y * RES + x) * 4;
+            d[idx]     = r / totalW;
+            d[idx + 1] = g / totalW;
+            d[idx + 2] = b / totalW;
+            d[idx + 3] = 255;
+          }
+        }
+        ctx.putImageData(img, 0, 0);
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+
+    document.getElementById('artwork').addEventListener('click', () => {
+      document.getElementById('card').classList.toggle('open');
+    });
+
+    const randomImage = images[Math.floor(Math.random() * images.length)];
+    const img = new Image();
+    img.onload = function() {
+      const colors = sampleColors(img);
+      const points = colors.map(c => ({
+        x: Math.random(),
+        y: Math.random(),
+        r: c.r,
+        g: c.g,
+        b: c.b
+      }));
+      startAnimation(points);
+      document.getElementById('artwork').src = randomImage;
+    };
+    img.src = randomImage;
+  </script>
+</body>
+</html>
