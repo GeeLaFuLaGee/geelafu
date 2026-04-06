@@ -190,6 +190,7 @@
       try {
         const meta = await exifr.parse(filename, { iptc: true, exif: true });
         if (!meta) return;
+        console.log(meta);
         document.getElementById('meta-title').textContent = meta.ObjectName || '';
         document.getElementById('meta-description').textContent = meta.Caption || meta.ImageDescription || '';
         const date = meta.DateCreated || meta.DateTimeOriginal;
