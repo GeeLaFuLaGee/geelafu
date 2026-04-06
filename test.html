@@ -34,32 +34,64 @@
       pointer-events: none;
     }
     #card {
-  display: flex;
-  flex-direction: row;
-  gap: 0;
-  align-items: stretch;
-}
-
-img#artwork {
-  max-width: 40vw;
-  max-height: 60vh;
-  width: auto;
-  height: auto;
-  display: block;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-#panel {
-  width: 0;
-  flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.25);
-  overflow: hidden;
-  transition: width 0.6s ease;
-}
-
-#card.open #panel {
-  width: 40vw;
-}
+      display: flex;
+      flex-direction: row;
+      gap: 0;
+      align-items: stretch;
+    }
+    img#artwork {
+      max-width: 40vw;
+      max-height: 60vh;
+      width: auto;
+      height: auto;
+      display: block;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    #panel {
+      width: 0;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.25);
+      overflow-y: auto;
+      overflow-x: hidden;
+      transition: width 0.6s ease;
+    }
+    #card.open #panel {
+      width: var(--panel-width, 40vw);
+    }
+    #panel-inner {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      min-width: 0;
+      font-family: monospace;
+      color: #fff;
+    }
+    #meta-title {
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      font-weight: bold;
+    }
+    #meta-description {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      letter-spacing: 0.05em;
+      opacity: 0.85;
+    }
+    #meta-footer {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    #meta-date,
+    #meta-creator,
+    #meta-jobtitle {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+    }
   </style>
 </head>
 <body>
@@ -68,9 +100,20 @@ img#artwork {
     <h1>GEE LA FU</h1>
     <div id="card">
       <img id="artwork" src="" alt="">
-      <div id="panel"></div>
+      <div id="panel">
+        <div id="panel-inner">
+          <div id="meta-title"></div>
+          <div id="meta-description"></div>
+          <div id="meta-footer">
+            <div id="meta-date"></div>
+            <div id="meta-creator"></div>
+            <div id="meta-jobtitle"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/exifr/dist/full.umd.js"></script>
   <script>
     const images = [
       'IMG_0804.JPG',
@@ -143,6 +186,24 @@ img#artwork {
       draw();
     }
 
+    async function loadMeta(filename) {
+      try {
+        const meta = await exifr.parse(filename, { iptc: true, exif: true });
+        if (!meta) return;
+        document.getElementById('meta-title').textContent = meta.ObjectName || '';
+        document.getElementById('meta-description').textContent = meta.Caption || meta.ImageDescription || '';
+        const date = meta.DateCreated || meta.DateTimeOriginal;
+        if (date) {
+          const d = new Date(date);
+          document.getElementById('meta-date').textContent = isNaN(d) ? date : d.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+        document.getElementById('meta-creator').textContent = meta.Artist || meta.Creator || '';
+        document.getElementById('meta-jobtitle').textContent = meta.AuthorsPosition || meta.JobTitle || '';
+      } catch(e) {
+        console.log('metadata fout', e);
+      }
+    }
+
     const artwork = document.getElementById('artwork');
     const panel = document.getElementById('panel');
     const card = document.getElementById('card');
@@ -164,11 +225,12 @@ img#artwork {
       }));
       startAnimation(points);
       artwork.src = randomImage;
+      loadMeta(randomImage);
       setTimeout(() => {
-      const w = artwork.offsetWidth;
-      const h = artwork.offsetHeight;
-      panel.style.height = h + 'px';
-      card.style.setProperty('--panel-width', w + 'px');
+        const w = artwork.offsetWidth;
+        const h = artwork.offsetHeight;
+        panel.style.height = h + 'px';
+        card.style.setProperty('--panel-width', w + 'px');
       }, 100);
     };
     img.src = randomImage;
