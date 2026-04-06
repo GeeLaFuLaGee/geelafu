@@ -225,7 +225,34 @@
       }));
       startAnimation(points);
       artwork.src = randomImage;
-      loadMeta(randomImage);
+      async function loadMeta(filename) {
+  try {
+    const meta = await exifr.parse(filename, { xmp: true, iptc: true, exif: false });
+    if (!meta) return;
+
+    document.getElementById('meta-title').textContent = 
+      meta.Title || meta.ObjectName || '';
+    
+    document.getElementById('meta-description').textContent = 
+      meta.Description || meta['Caption-Abstract'] || meta.ImageDescription || '';
+    
+    const date = meta.DateCreated;
+    if (date) {
+      const d = new Date(date);
+      document.getElementById('meta-date').textContent = 
+        isNaN(d) ? date : d.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    document.getElementById('meta-creator').textContent = 
+      meta.Creator || meta['By-line'] || meta.Artist || '';
+    
+    document.getElementById('meta-jobtitle').textContent = 
+      meta.AuthorsPosition || meta['By-lineTitle'] || '';
+
+  } catch(e) {
+    console.log('metadata fout', e);
+  }
+}
       setTimeout(() => {
         const w = artwork.offsetWidth;
         const h = artwork.offsetHeight;
