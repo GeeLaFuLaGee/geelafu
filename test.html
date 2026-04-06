@@ -188,8 +188,7 @@
 
     async function loadMeta(filename) {
       try {
-        const meta = await exifr.parse(filename, { iptc: true, exif: false, xmp: true });
-        if (!meta) return;
+        const meta = await exifr.parse(filename, { iptc: true, exif: true, xmp: true, icc: false, thumbnail: false });
         console.log(meta);
         document.getElementById('meta-title').textContent = meta.ObjectName || '';
         document.getElementById('meta-description').textContent = meta.Caption || meta.ImageDescription || '';
