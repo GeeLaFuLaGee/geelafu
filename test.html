@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -188,17 +187,22 @@
 
     async function loadMeta(filename) {
       try {
-        const meta = await exifr.parse(filename, { xmp: true, exif: true, iptc: false });
-        console.log(meta);
-        document.getElementById('meta-title').textContent = meta.ObjectName || '';
-        document.getElementById('meta-description').textContent = meta.Caption || meta.ImageDescription || '';
-        const date = meta.DateCreated || meta.DateTimeOriginal;
+        const meta = await exifr.parse(filename, { xmp: true, iptc: true, exif: false });
+        if (!meta) return;
+        document.getElementById('meta-title').textContent =
+          meta.Title || meta.ObjectName || '';
+        document.getElementById('meta-description').textContent =
+          meta.Description || meta.ImageDescription || '';
+        const date = meta.DateCreated;
         if (date) {
           const d = new Date(date);
-          document.getElementById('meta-date').textContent = isNaN(d) ? date : d.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+          document.getElementById('meta-date').textContent =
+            isNaN(d) ? date : d.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
         }
-        document.getElementById('meta-creator').textContent = meta.Artist || meta.Creator || '';
-        document.getElementById('meta-jobtitle').textContent = meta.AuthorsPosition || meta.JobTitle || '';
+        document.getElementById('meta-creator').textContent =
+          meta.Creator || meta.Artist || '';
+        document.getElementById('meta-jobtitle').textContent =
+          meta.AuthorsPosition || '';
       } catch(e) {
         console.log('metadata fout', e);
       }
@@ -225,34 +229,7 @@
       }));
       startAnimation(points);
       artwork.src = randomImage;
-      async function loadMeta(filename) {
-  try {
-    const meta = await exifr.parse(filename, { xmp: true, iptc: true, exif: false });
-    if (!meta) return;
-
-    document.getElementById('meta-title').textContent = 
-      meta.Title || meta.ObjectName || '';
-    
-    document.getElementById('meta-description').textContent = 
-      meta.Description || meta['Caption-Abstract'] || meta.ImageDescription || '';
-    
-    const date = meta.DateCreated;
-    if (date) {
-      const d = new Date(date);
-      document.getElementById('meta-date').textContent = 
-        isNaN(d) ? date : d.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
-    }
-
-    document.getElementById('meta-creator').textContent = 
-      meta.Creator || meta['By-line'] || meta.Artist || '';
-    
-    document.getElementById('meta-jobtitle').textContent = 
-      meta.AuthorsPosition || meta['By-lineTitle'] || '';
-
-  } catch(e) {
-    console.log('metadata fout', e);
-  }
-}
+      loadMeta(randomImage);
       setTimeout(() => {
         const w = artwork.offsetWidth;
         const h = artwork.offsetHeight;
@@ -264,4 +241,3 @@
   </script>
 </body>
 </html>
-```
