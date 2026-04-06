@@ -41,15 +41,14 @@
 }
 
 img#artwork {
-  width: 40vw;
+  max-width: 40vw;
   max-height: 60vh;
-  object-fit: contain;
+  width: auto;
+  height: auto;
   display: block;
   cursor: pointer;
   flex-shrink: 0;
-  background: transparent;
 }
-
 #panel {
   width: 0;
   flex-shrink: 0;
@@ -166,8 +165,10 @@ img#artwork {
       startAnimation(points);
       artwork.src = randomImage;
       setTimeout(() => {
-      card.style.setProperty('--panel-width', '40vw');
-      panel.style.height = artwork.offsetHeight + 'px';
+      const w = artwork.offsetWidth;
+      const h = artwork.offsetHeight;
+      panel.style.height = h + 'px';
+      card.style.setProperty('--panel-width', w + 'px');
       }, 100);
     };
     img.src = randomImage;
