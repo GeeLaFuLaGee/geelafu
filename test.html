@@ -38,11 +38,11 @@
       flex-direction: row;
       gap: 0;
       overflow: hidden;
+      align-items: flex-start;
     }
     img#artwork {
       width: 40vw;
       max-height: 60vh;
-      object-fit: contain;
       display: block;
       cursor: pointer;
       flex-shrink: 0;
@@ -162,11 +162,11 @@
       startAnimation(points);
       artwork.src = randomImage;
       setTimeout(() => {
-        const w = artwork.offsetWidth;
-        const h = artwork.offsetHeight;
-        panel.style.height = h + 'px';
-        card.style.setProperty('--panel-width', w + 'px');
-      }, 100);
+      const rect = artwork.getBoundingClientRect();
+      panel.style.width = '0px';
+      panel.style.height = rect.height + 'px';
+      card.style.setProperty('--panel-width', rect.width + 'px');
+    }, 100);
     };
     img.src = randomImage;
   </script>
