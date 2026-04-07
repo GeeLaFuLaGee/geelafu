@@ -23,8 +23,6 @@
       flex-direction: column;
       align-items: center;
       gap: 2rem;
-      max-height: 100vh;
-      overflow: hidden;
     }
     h1 {
       font-family: monospace;
@@ -263,11 +261,11 @@
       artwork.src = randomImage;
       loadMeta(randomImage);
       setTimeout(() => {
-        const w = artwork.offsetWidth;
-        const h = artwork.offsetHeight;
-        card.style.setProperty('--panel-width', w + 'px');
-        card.style.setProperty('--panel-height', h + 'px');
-      }, 100);
+      const w = artwork.offsetWidth;
+      const h = artwork.offsetHeight;
+      card.style.setProperty('--panel-width', w + 'px');
+      card.style.setProperty('--panel-height', h + 'px');
+    }, 300);
     };
     img.src = randomImage;
   </script>
