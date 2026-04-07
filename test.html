@@ -122,9 +122,9 @@
       letter-spacing: 0.1em;
       opacity: 0.6;
     }
+    
     #next {
       position: fixed;
-      bottom: 2rem;
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
@@ -137,6 +137,7 @@
       color: #fff;
       opacity: 0.5;
       text-decoration: none;
+      font-weight: bold;
     }
 
     #next-link:hover {
@@ -301,6 +302,14 @@ img.onload = function() {
   }));
   startAnimation(points);
   artwork.src = randomImage;
+  artwork.onload = () => {
+  const rect = artwork.getBoundingClientRect();
+  const bottomOfPhoto = rect.bottom;
+  const bottomOfScreen = window.innerHeight;
+  const middle = bottomOfPhoto + (bottomOfScreen - bottomOfPhoto) / 2;
+  document.getElementById('next').style.top = middle + 'px';
+  document.getElementById('next').style.bottom = 'auto';
+};
   loadMeta(randomImage);
 };
 img.src = randomImage;
