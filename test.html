@@ -255,6 +255,10 @@
       panel.classList.toggle('open');
     });
 
+    panel.addEventListener('click', () => {
+      panel.classList.remove('open');
+    });
+
     const randomImage = images[Math.floor(Math.random() * images.length)];
     const img = new Image();
     img.onload = function() {
