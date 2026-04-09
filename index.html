@@ -53,7 +53,6 @@
       transition: transform 0.6s ease;
     }
 
-    /* Landscape: paneel rechts */
     @media (orientation: landscape) {
       #panel {
         top: 0;
@@ -67,7 +66,6 @@
       }
     }
 
-    /* Portrait: paneel onderaan */
     @media (orientation: portrait) {
       img#artwork {
         max-width: 80vw;
@@ -122,7 +120,7 @@
       letter-spacing: 0.1em;
       opacity: 0.6;
     }
-    
+
     #next {
       position: fixed;
       left: 50%;
@@ -284,41 +282,40 @@
     });
 
     const lastImage = sessionStorage.getItem('lastImage');
-const available = lastImage
-  ? images.filter(i => i !== lastImage)
-  : images;
-const randomImage = available[Math.floor(Math.random() * available.length)];
-sessionStorage.setItem('lastImage', randomImage);
+    const available = lastImage
+      ? images.filter(i => i !== lastImage)
+      : images;
+    const randomImage = available[Math.floor(Math.random() * available.length)];
+    sessionStorage.setItem('lastImage', randomImage);
 
-const img = new Image();
-img.onload = function() {
-  const colors = sampleColors(img);
-  const points = colors.map(c => ({
-    x: Math.random(),
-    y: Math.random(),
-    r: c.r,
-    g: c.g,
-    b: c.b
-  }));
-  startAnimation(points);
-  artwork.src = randomImage;
-  loadMeta(randomImage);
-  setTimeout(() => {
-  const rect = artwork.getBoundingClientRect();
-  const bottomOfPhoto = rect.bottom;
-  const bottomOfScreen = window.innerHeight;
-  const middle = bottomOfPhoto + (bottomOfScreen - bottomOfPhoto) / 2;
-  document.getElementById('next').style.top = middle + 'px';
-  document.getElementById('next').style.bottom = 'auto';
-}, 200);
-};
-img.src = randomImage;
+    const img = new Image();
+    img.onload = function() {
+      const colors = sampleColors(img);
+      const points = colors.map(c => ({
+        x: Math.random(),
+        y: Math.random(),
+        r: c.r,
+        g: c.g,
+        b: c.b
+      }));
+      startAnimation(points);
+      artwork.src = randomImage;
+      loadMeta(randomImage);
+      setTimeout(() => {
+        const rect = artwork.getBoundingClientRect();
+        const bottomOfPhoto = rect.bottom;
+        const bottomOfScreen = window.innerHeight;
+        const middle = bottomOfPhoto + (bottomOfScreen - bottomOfPhoto) / 2;
+        document.getElementById('next').style.top = middle + 'px';
+        document.getElementById('next').style.bottom = 'auto';
+      }, 200);
+    };
+    img.src = randomImage;
 
-document.getElementById('next-link').addEventListener('click', (e) => {
-  e.preventDefault();
-  window.location.reload();
-});
-    
+    document.getElementById('next-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.reload();
+    });
   </script>
 </body>
 </html>
