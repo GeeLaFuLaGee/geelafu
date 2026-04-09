@@ -302,15 +302,15 @@ img.onload = function() {
   }));
   startAnimation(points);
   artwork.src = randomImage;
-  artwork.onload = () => {
+  loadMeta(randomImage);
+  setTimeout(() => {
   const rect = artwork.getBoundingClientRect();
   const bottomOfPhoto = rect.bottom;
   const bottomOfScreen = window.innerHeight;
   const middle = bottomOfPhoto + (bottomOfScreen - bottomOfPhoto) / 2;
   document.getElementById('next').style.top = middle + 'px';
   document.getElementById('next').style.bottom = 'auto';
-};
-  loadMeta(randomImage);
+}, 200);
 };
 img.src = randomImage;
 
