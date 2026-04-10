@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gee La Fu — Analogue</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <h1>GEE LA FU</h1>
+  <h2>Analogue</h2>
+  <div id="artwork-wrap">
+    <img id="artwork" src="" alt="">
+  </div>
+  <div id="panel">
+    <div id="panel-inner">
+      <div id="meta-title"></div>
+      <div id="meta-description"></div>
+      <div id="meta-footer">
+        <div id="meta-date"></div>
+        <div id="meta-creator"></div>
+        <div id="meta-jobtitle"></div>
+      </div>
+    </div>
+  </div>
+  <div id="nav">
+    <button class="nav-btn" id="btn-refresh">REFRESH</button>
+    <button class="nav-btn" id="btn-menu">MENU</button>
+  </div>
+  <div id="menu">
+    <a class="menu-option" href="index.html">SHOW ME INSPIRATION</a>
+    <a class="menu-option" href="digital.html">SHOW ME DIGITAL ARTWORK</a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/exifr/dist/full.umd.js"></script>
+  <script src="main.js"></script>
+  <script>
+    const images = [
+      'analogue1.JPG',
+      'analogue2.JPG'
+    ];
+    initPage(images);
+  </script>
+</body>
+</html>
