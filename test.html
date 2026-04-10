@@ -345,11 +345,13 @@
     const btnMenu = document.getElementById('btn-menu');
 
     artwork.addEventListener('click', () => {
-      panel.classList.toggle('open');
+      const isOpen = panel.classList.toggle('open');
+      document.getElementById('nav').style.display = isOpen ? 'none' : 'flex';
     });
 
     panel.addEventListener('click', () => {
       panel.classList.remove('open');
+      document.getElementById('nav').style.display = 'flex';
     });
 
     btnRefresh.addEventListener('click', () => {
