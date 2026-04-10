@@ -55,16 +55,18 @@
 
     @media (orientation: landscape) {
       #panel {
-        top: 0;
-        right: 0;
-        width: 35vw;
-        height: 100vh;
-        transform: translateX(100%);
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 100%);
+        width: 60vw;
+        height: auto;
+        max-height: 80vh;
+        overflow-y: auto;
       }
-      #panel.open {
-        transform: translateX(0);
-      }
+    #panel.open {
+      transform: translate(-50%, 0);
     }
+  }
 
     @media (orientation: portrait) {
       img#artwork {
