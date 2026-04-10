@@ -130,6 +130,7 @@
       display: flex;
       gap: 2rem;
       z-index: 50;
+      opacity: 0;
     }
 
     .nav-btn {
@@ -396,7 +397,8 @@
         const nav = document.getElementById('nav');
         nav.style.top = middle + 'px';
         nav.style.transform = 'translate(-50%, -50%)';
-      }, 200);
+        nav.style.opacity = '1';
+    }, 200);
     };
     img.src = randomImage;
   </script>
