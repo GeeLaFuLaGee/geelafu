@@ -123,7 +123,6 @@
 
     #nav {
       position: fixed;
-      bottom: 3rem;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -386,8 +385,9 @@
         const bottomOfPhoto = rect.bottom;
         const bottomOfScreen = window.innerHeight;
         const middle = bottomOfPhoto + (bottomOfScreen - bottomOfPhoto) / 2;
-        document.getElementById('nav').style.top = middle + 'px';
-        document.getElementById('nav').style.bottom = 'auto';
+        const nav = document.getElementById('nav');
+        nav.style.top = middle + 'px';
+        nav.style.transform = 'translate(-50%, -50%)';
       }, 200);
     };
     img.src = randomImage;
