@@ -344,14 +344,16 @@
     const btnRefresh = document.getElementById('btn-refresh');
     const btnMenu = document.getElementById('btn-menu');
 
-    artwork.addEventListener('click', () => {
+    artwork.addEventListener('click', (e) => {
+      e.stopPropagation();
       const isOpen = panel.classList.toggle('open');
-      document.getElementById('nav').style.display = isOpen ? 'none' : 'flex';
+      document.getElementById('nav').style.visibility = isOpen ? 'hidden' : 'visible';
     });
 
-    panel.addEventListener('click', () => {
+    panel.addEventListener('click', (e) => {
+      e.stopPropagation();
       panel.classList.remove('open');
-      document.getElementById('nav').style.display = 'flex';
+      document.getElementById('nav').style.visibility = 'visible';
     });
 
     btnRefresh.addEventListener('click', () => {
