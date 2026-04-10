@@ -403,7 +403,23 @@
         g: c.g,
         b: c.b
       }));
-      startAnimation(points);
+
+      document.getElementById('btn-refresh').style.background = 
+        `rgb(${points[0].r}, ${points[0].g}, ${points[0].b})`;
+      document.getElementById('btn-menu').style.background = 
+        `rgb(${points[1].r}, ${points[1].g}, ${points[1].b})`;
+
+      function contrastColor(r, g, b) {
+        const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+        return luminance > 0.5 ? '#000' : '#fff';
+      }
+
+      document.getElementById('btn-refresh').style.color = 
+        contrastColor(points[0].r, points[0].g, points[0].b);
+      document.getElementById('btn-menu').style.color = 
+        contrastColor(points[1].r, points[1].g, points[1].b);
+
+  startAnimation(points);
       artwork.src = randomImage;
       loadMeta(randomImage);
       setTimeout(() => {
