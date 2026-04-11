@@ -19,6 +19,52 @@ h1 {
   color: #fff;
   white-space: nowrap;
   z-index: 10;
+  cursor: pointer;
+}
+
+#bio-panel {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  width: 60vw;
+  max-height: 80vh;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 20;
+  overflow-y: auto;
+  transition: transform 0.6s ease;
+}
+
+#bio-panel.open {
+  transform: translate(-50%, 0);
+}
+
+#bio-inner {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-family: monospace;
+  color: #fff;
+}
+
+#bio-inner a {
+  color: #fff;
+  opacity: 0.7;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  font-size: 0.8rem;
+}
+
+#bio-inner a:hover {
+  opacity: 1;
+}
+
+#bio-inner p {
+  font-size: 0.8rem;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
 }
 
 h2 {
@@ -80,6 +126,9 @@ img#artwork {
   img#artwork {
     max-width: 80vw;
     max-height: 50vh;
+  }
+  #bio-panel {
+    width: 100vw;
   }
   #panel {
     bottom: 0;
