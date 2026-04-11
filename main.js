@@ -149,6 +149,7 @@ bioPanel.addEventListener('click', (e) => {
   sessionStorage.setItem('lastImage', randomImage);
 
   const img = new Image();
+  img.crossOrigin = 'anonymous';
   img.onload = function() {
     const colors = sampleColors(img);
     const points = colors.map(c => ({
