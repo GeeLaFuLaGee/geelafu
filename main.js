@@ -128,6 +128,19 @@ function initPage(images) {
     btnMenu.textContent = isOpen ? 'STAY' : 'MENU';
   });
 
+  const bioTrigger = document.getElementById('bio-trigger');
+const bioPanel = document.getElementById('bio-panel');
+
+bioTrigger.addEventListener('click', () => {
+  bioPanel.classList.toggle('open');
+});
+
+bioPanel.addEventListener('click', (e) => {
+  if (!e.target.closest('a')) {
+    bioPanel.classList.remove('open');
+  }
+});
+
   const lastImage = sessionStorage.getItem('lastImage');
   const available = lastImage
     ? images.filter(i => i !== lastImage)
