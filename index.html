@@ -43,11 +43,12 @@
   <script src="https://cdn.jsdelivr.net/npm/exifr/dist/full.umd.js"></script>
   <script src="main.js"></script>
   <script>
-    const images = [
-      'IMG_0804.JPG',
-      'IMG_0813.JPG',
-    ];
-    initPage(images);
+    fetch('https://geelafu-images-list.gee-la-fu-la-gee.workers.dev/?folder=inspiration')
+      .then(r => r.json())
+      .then(files => {
+        const images = files.map(f => 'https://images.geelafu.com/' + f);
+        initPage(images);
+  });
   </script>
 </body>
 </html>
