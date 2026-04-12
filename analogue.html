@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gee La Fu — Analogue</title>
+  <title>Gee La Fu — Analogue Art</title>
+  <meta name="description" content="Hand-drawn artwork by Belgian artist Gee La Fu — intuitive line art, doodle art with ambition, influenced by street art and the tradition of lucid drawing.">
+  <meta name="author" content="Gee La Fu">
+  <meta property="og:title" content="Gee La Fu — Analogue Art">
+  <meta property="og:description" content="Hand-drawn artwork by Belgian artist Gee La Fu — intuitive line art, doodle art with ambition, influenced by street art and the tradition of lucid drawing.">
+  <meta property="og:url" content="https://geelafu.com/analogue.html">
+  <meta property="og:type" content="website">
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -11,13 +17,13 @@
   <canvas id="c"></canvas>
   <h1 id="bio-trigger">GEE LA FU</h1>
   <div id="bio-panel">
-  <div id="bio-inner">
-    <p>Jouw bio tekst hier.</p>
-    <p><a href="mailto:jouw@email.com">jouw@email.com</a></p>
-    <p><a href="https://instagram.com/gee.la.fu" target="_blank">Instagram</a></p>
-    <p><a href="https://tiktok.com/@gee.la.fu" target="_blank">TikTok</a></p>
+    <div id="bio-inner">
+      <p>Drawing is where it started and where it always returns. No sketches, no preparation — the hand moves and the image appears. What you see here is intuitive line work built over decades, influenced by street art, doodle culture and a stubborn refusal to stay amateur. Gee La Fu is the artistic alter ego of a Belgian designer who draws the way others think.</p>
+      <p><a href="mailto:gee.la.fu.la.gee@gmail.com">gee.la.fu.la.gee@gmail.com</a></p>
+      <p><a href="https://instagram.com/gee.la.fu" target="_blank">Instagram</a></p>
+      <p><a href="https://tiktok.com/@gee.la.fu" target="_blank">TikTok</a></p>
+    </div>
   </div>
-</div>
   <h2>My analogue artwork</h2>
   <div id="artwork-wrap">
     <img id="artwork" src="" alt="" crossorigin="anonymous">
@@ -49,7 +55,7 @@
       .then(files => {
         const images = files.map(f => 'https://images.geelafu.com/' + f);
         initPage(images);
-  });
+      });
   </script>
 </body>
 </html>
