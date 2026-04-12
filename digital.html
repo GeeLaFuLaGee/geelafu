@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gee La Fu — Digital</title>
+  <title>Gee La Fu — Digital Design & Art</title>
+  <meta name="description" content="Digital work by Belgian brand designer and artist Gee La Fu — graphic design, vector illustration and experimental visual work for clients and beyond.">
+  <meta name="author" content="Gee La Fu">
+  <meta property="og:title" content="Gee La Fu — Digital Design & Art">
+  <meta property="og:description" content="Digital work by Belgian brand designer and artist Gee La Fu — graphic design, vector illustration and experimental visual work for clients and beyond.">
+  <meta property="og:url" content="https://geelafu.com/digital.html">
+  <meta property="og:type" content="website">
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -11,13 +17,13 @@
   <canvas id="c"></canvas>
   <h1 id="bio-trigger">GEE LA FU</h1>
   <div id="bio-panel">
-  <div id="bio-inner">
-    <p>Jouw bio tekst hier.</p>
-    <p><a href="mailto:jouw@email.com">jouw@email.com</a></p>
-    <p><a href="https://instagram.com/gee.la.fu" target="_blank">Instagram</a></p>
-    <p><a href="https://tiktok.com/@gee.la.fu" target="_blank">TikTok</a></p>
+    <div id="bio-inner">
+      <p>Behind Gee La Fu is a Belgian brand designer with years of experience translating ideas into visual systems. The digital work shown here moves between the applied and the experimental — graphic and photographic, commissioned and self-initiated. Design as a discipline, but never without a point of view.</p>
+      <p><a href="mailto:gee.la.fu.la.gee@gmail.com">gee.la.fu.la.gee@gmail.com</a></p>
+      <p><a href="https://instagram.com/gee.la.fu" target="_blank">Instagram</a></p>
+      <p><a href="https://tiktok.com/@gee.la.fu" target="_blank">TikTok</a></p>
+    </div>
   </div>
-</div>
   <h2>My digital artwork</h2>
   <div id="artwork-wrap">
     <img id="artwork" src="" alt="" crossorigin="anonymous">
@@ -34,7 +40,7 @@
     </div>
   </div>
   <div id="nav">
-    <button class="nav-btn" id="btn-refresh">REFRESH</button>
+    <button class="nav-btn" id="btn-refresh">MORE</button>
     <button class="nav-btn" id="btn-menu">MENU</button>
   </div>
   <div id="menu">
@@ -49,7 +55,7 @@
       .then(files => {
         const images = files.map(f => 'https://images.geelafu.com/' + f);
         initPage(images);
-  });
+      });
   </script>
 </body>
 </html>
