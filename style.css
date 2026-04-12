@@ -27,7 +27,7 @@ h1 {
   top: 0;
   left: 50%;
   transform: translate(-50%, -100%);
-  width: 60vw;
+  width: 50vw;
   max-height: 80vh;
   background: rgba(0, 0, 0, 0.75);
   z-index: 20;
@@ -92,7 +92,7 @@ h2 {
 
 img#artwork {
   display: block;
-  max-width: 40vw;
+  max-width: 50vw;
   max-height: 60vh;
   width: auto;
   height: auto;
@@ -112,7 +112,7 @@ img#artwork {
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 100%);
-    width: 60vw;
+    width: 50vw;
     height: auto;
     max-height: 80vh;
     overflow-y: auto;
