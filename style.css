@@ -243,8 +243,8 @@ img#artwork {
   max-width: 400px;
   flex: 1;
   max-height: 200px;
-  background: #fff;
-  border: 1px solid #fff;
+  background: rgba(0, 0, 0, 0.75);
+  border: none;
   border-radius: 1rem;
   display: flex;
   align-items: center;
@@ -255,12 +255,12 @@ img#artwork {
   letter-spacing: 0.15em;
   cursor: pointer;
   text-decoration: none;
-  color: #000;
+  color: #fff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .menu-option:hover {
-  background: #f0f0f0;
+  background: rgba(0, 0, 0, 0.9);
 }
 
 #menu.open .menu-option {
