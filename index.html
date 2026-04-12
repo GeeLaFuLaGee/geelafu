@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gee La Fu — Inspiration</title>
+  <title>Gee La Fu — Visual Inspiration</title>
+  <meta name="description" content="A Belgian creative's visual diary — moments of unexpected beauty, rebellious aesthetics and quiet observations that influence art and design.">
+  <meta name="author" content="Gee La Fu">
+  <meta property="og:title" content="Gee La Fu — Visual Inspiration">
+  <meta property="og:description" content="A Belgian creative's visual diary — moments of unexpected beauty, rebellious aesthetics and quiet observations that influence art and design.">
+  <meta property="og:url" content="https://geelafu.com">
+  <meta property="og:type" content="website">
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -11,13 +17,13 @@
   <canvas id="c"></canvas>
   <h1 id="bio-trigger">GEE LA FU</h1>
   <div id="bio-panel">
-  <div id="bio-inner">
-    <p>Jouw bio tekst hier.</p>
-    <p><a href="mailto:gee.la.fu.la.gee@gmail.com">gee.la.fu.la.gee@gmail.com</a></p>
-    <p><a href="https://instagram.com/gee.la.fu" target="_blank">Instagram</a></p>
-    <p><a href="https://tiktok.com/@gee.la.fu" target="_blank">TikTok</a></p>
+    <div id="bio-inner">
+      <p>I collect moments. Not with intention, but with instinct — the kind of visual encounters that stop you mid-stride. A texture, a gesture, a collision of colour that most people walk past. These are the things that feed my work as a creative, both in art and in design. I am a Belgian designer and artist operating under the name Gee La Fu.</p>
+      <p><a href="mailto:gee.la.fu.la.gee@gmail.com">gee.la.fu.la.gee@gmail.com</a></p>
+      <p><a href="https://instagram.com/gee.la.fu" target="_blank">Instagram</a></p>
+      <p><a href="https://tiktok.com/@gee.la.fu" target="_blank">TikTok</a></p>
+    </div>
   </div>
-</div>
   <h2>Things that inspire me</h2>
   <div id="artwork-wrap">
     <img id="artwork" src="" alt="" crossorigin="anonymous">
@@ -49,7 +55,7 @@
       .then(files => {
         const images = files.map(f => 'https://images.geelafu.com/' + f);
         initPage(images);
-  });
+      });
   </script>
 </body>
 </html>
